@@ -7,9 +7,9 @@
  *
  * Code generation for model "modeChanger".
  *
- * Model version              : 1.25
+ * Model version              : 1.28
  * Simulink Coder version : 9.3 (R2020a) 18-Nov-2019
- * C++ source code generated on : Fri Sep 18 22:19:45 2020
+ * C++ source code generated on : Fri Sep 18 22:35:03 2020
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -45,24 +45,42 @@ typedef struct {
 
 #endif
 
-#ifndef struct_tag_rVaL2jCthDg1Nc4cghuMrG
-#define struct_tag_rVaL2jCthDg1Nc4cghuMrG
+#ifndef struct_tag_KSdGoEc2IyOHz4CLi4rcCD
+#define struct_tag_KSdGoEc2IyOHz4CLi4rcCD
 
-struct tag_rVaL2jCthDg1Nc4cghuMrG
+struct tag_KSdGoEc2IyOHz4CLi4rcCD
+{
+  int32_T __dummy;
+};
+
+#endif                                 /*struct_tag_KSdGoEc2IyOHz4CLi4rcCD*/
+
+#ifndef typedef_e_robotics_slcore_internal_bl_T
+#define typedef_e_robotics_slcore_internal_bl_T
+
+typedef struct tag_KSdGoEc2IyOHz4CLi4rcCD e_robotics_slcore_internal_bl_T;
+
+#endif                               /*typedef_e_robotics_slcore_internal_bl_T*/
+
+#ifndef struct_tag_PzhaB0v2Sx4ikuHWZx5WUB
+#define struct_tag_PzhaB0v2Sx4ikuHWZx5WUB
+
+struct tag_PzhaB0v2Sx4ikuHWZx5WUB
 {
   boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
   boolean_T isSetupComplete;
+  e_robotics_slcore_internal_bl_T SampleTimeHandler;
 };
 
-#endif                                 /*struct_tag_rVaL2jCthDg1Nc4cghuMrG*/
+#endif                                 /*struct_tag_PzhaB0v2Sx4ikuHWZx5WUB*/
 
-#ifndef typedef_ros_slros_internal_block_SetP_T
-#define typedef_ros_slros_internal_block_SetP_T
+#ifndef typedef_ros_slros_internal_block_GetP_T
+#define typedef_ros_slros_internal_block_GetP_T
 
-typedef struct tag_rVaL2jCthDg1Nc4cghuMrG ros_slros_internal_block_SetP_T;
+typedef struct tag_PzhaB0v2Sx4ikuHWZx5WUB ros_slros_internal_block_GetP_T;
 
-#endif                               /*typedef_ros_slros_internal_block_SetP_T*/
+#endif                               /*typedef_ros_slros_internal_block_GetP_T*/
 
 #ifndef struct_tag_rkSooZHJZnr3Dpfu1LNqfH
 #define struct_tag_rkSooZHJZnr3Dpfu1LNqfH

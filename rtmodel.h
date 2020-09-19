@@ -7,9 +7,9 @@
  *
  * Code generation for model "modeChanger".
  *
- * Model version              : 1.25
+ * Model version              : 1.28
  * Simulink Coder version : 9.3 (R2020a) 18-Nov-2019
- * C++ source code generated on : Fri Sep 18 22:19:45 2020
+ * C++ source code generated on : Fri Sep 18 22:35:03 2020
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -23,7 +23,7 @@
  * Code generation for Simulink model "modeChanger".
  *
  * Simulink Coder version                : 9.3 (R2020a) 18-Nov-2019
- * C++ source code generated on : Fri Sep 18 22:19:45 2020
+ * C++ source code generated on : Fri Sep 18 22:35:03 2020
  *
  * Note that the generated code is not dependent on this header file.
  * The file is used in cojuction with the automatic build procedure.

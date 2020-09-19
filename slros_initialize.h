@@ -13,14 +13,14 @@ extern SimulinkSubscriber<geometry_msgs::Twist, SL_Bus_modeChanger_geometry_msgs
 // For Block modeChanger/Publish
 extern SimulinkPublisher<geometry_msgs::Twist, SL_Bus_modeChanger_geometry_msgs_Twist> Pub_modeChanger_36;
 
-// For Block modeChanger/Set Parameter1
-extern SimulinkParameterSetter<real64_T, double> ParamSet_modeChanger_51;
+// For Block modeChanger/highDurationParam
+extern SimulinkParameterGetter<real64_T, double> ParamGet_modeChanger_59;
 
-// For Block modeChanger/Set Parameter2
-extern SimulinkParameterSetter<real64_T, double> ParamSet_modeChanger_52;
+// For Block modeChanger/lowDurationParam
+extern SimulinkParameterGetter<real64_T, double> ParamGet_modeChanger_56;
 
-// For Block modeChanger/Set Parameter3
-extern SimulinkParameterSetter<real64_T, double> ParamSet_modeChanger_53;
+// For Block modeChanger/lowDurationParam1
+extern SimulinkParameterGetter<real64_T, double> ParamGet_modeChanger_60;
 
 void slros_node_init(int argc, char** argv);
 

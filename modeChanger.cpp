@@ -7,9 +7,9 @@
  *
  * Code generation for model "modeChanger".
  *
- * Model version              : 1.25
+ * Model version              : 1.28
  * Simulink Coder version : 9.3 (R2020a) 18-Nov-2019
- * C++ source code generated on : Fri Sep 18 22:19:45 2020
+ * C++ source code generated on : Fri Sep 18 22:35:03 2020
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -43,9 +43,16 @@ RT_MODEL_modeChanger_T modeChanger_M_ = RT_MODEL_modeChanger_T();
 RT_MODEL_modeChanger_T *const modeChanger_M = &modeChanger_M_;
 
 /* Forward declaration for local functions */
+static void matlabCodegenHandle_matlabCodeg(ros_slros_internal_block_GetP_T *obj);
 static void matlabCodegenHandle_matlab_ktm2(ros_slros_internal_block_Subs_T *obj);
 static void matlabCodegenHandle_matlabC_ktm(ros_slros_internal_block_Publ_T *obj);
-static void matlabCodegenHandle_matlabCodeg(ros_slros_internal_block_SetP_T *obj);
+static void matlabCodegenHandle_matlabCodeg(ros_slros_internal_block_GetP_T *obj)
+{
+  if (!obj->matlabCodegenIsDeleted) {
+    obj->matlabCodegenIsDeleted = true;
+  }
+}
+
 static void matlabCodegenHandle_matlab_ktm2(ros_slros_internal_block_Subs_T *obj)
 {
   if (!obj->matlabCodegenIsDeleted) {
@@ -60,21 +67,25 @@ static void matlabCodegenHandle_matlabC_ktm(ros_slros_internal_block_Publ_T *obj
   }
 }
 
-static void matlabCodegenHandle_matlabCodeg(ros_slros_internal_block_SetP_T *obj)
-{
-  if (!obj->matlabCodegenIsDeleted) {
-    obj->matlabCodegenIsDeleted = true;
-  }
-}
-
 /* Model step function */
 void modeChanger_step(void)
 {
   /* local block i/o variables */
   real_T rtb_X;
   real_T rtb_transition;
+  real_T value;
+  real_T value_0;
   boolean_T b_varargout_1;
   boolean_T guard1 = false;
+
+  /* MATLABSystem: '<Root>/lowDurationParam' */
+  ParamGet_modeChanger_56.get_parameter(&value);
+
+  /* MATLABSystem: '<Root>/highDurationParam' */
+  ParamGet_modeChanger_59.get_parameter(&value);
+
+  /* MATLABSystem: '<Root>/lowDurationParam1' */
+  ParamGet_modeChanger_60.get_parameter(&value_0);
 
   /* Outputs for Atomic SubSystem: '<Root>/Subscribe2' */
   /* MATLABSystem: '<S3>/SourceBlock' incorporates:
@@ -98,8 +109,8 @@ void modeChanger_step(void)
   rtb_X = modeChanger_B.In1.Linear.X;
 
   /* Chart: '<Root>/Chart' incorporates:
-   *  Constant: '<Root>/highDurationParam'
-   *  Constant: '<Root>/waitTimeParam'
+   *  MATLABSystem: '<Root>/highDurationParam'
+   *  MATLABSystem: '<Root>/lowDurationParam1'
    */
   if (modeChanger_DW.temporalCounter_i1 < MAX_uint32_T) {
     modeChanger_DW.temporalCounter_i1++;
@@ -114,7 +125,7 @@ void modeChanger_step(void)
     switch (modeChanger_DW.is_c3_modeChanger) {
      case modeChanger_IN_Debounce:
       if (modeChanger_DW.temporalCounter_i1 >= static_cast<uint32_T>(ceil
-           (modeChanger_P.waitTimeParam_Value * 50.0))) {
+           (value_0 * 50.0))) {
         modeChanger_DW.is_c3_modeChanger = modeChanger_IN_HeldIn;
       } else {
         if (rtb_X == 0.0) {
@@ -138,7 +149,7 @@ void modeChanger_step(void)
         modeChanger_DW.temporalCounter_i1 = 0U;
       } else {
         if (modeChanger_DW.temporalCounter_i1 >= static_cast<uint32_T>(ceil
-             (modeChanger_P.highDurationParam_Value * 50.0))) {
+             (value * 50.0))) {
           modeChanger_DW.is_c3_modeChanger = modeChanger_IN_Debounce;
           modeChanger_DW.temporalCounter_i1 = 0U;
         }
@@ -169,7 +180,7 @@ void modeChanger_step(void)
 
      case modeChanger_IN_ResetPops:
       if (modeChanger_DW.temporalCounter_i1 >= static_cast<uint32_T>(ceil
-           (modeChanger_P.waitTimeParam_Value * 50.0))) {
+           (value_0 * 50.0))) {
         modeChanger_B.publishPops = 0.0;
         modeChanger_DW.is_c3_modeChanger = modeChanger_IN_idle;
         modeChanger_DW.temporalCounter_i1 = 0U;
@@ -183,7 +194,7 @@ void modeChanger_step(void)
         modeChanger_DW.temporalCounter_i1 = 0U;
       } else {
         if (modeChanger_DW.temporalCounter_i1 >= static_cast<uint32_T>(ceil
-             (modeChanger_P.waitTimeParam_Value * 50.0))) {
+             (value_0 * 50.0))) {
           modeChanger_DW.is_c3_modeChanger = modeChanger_IN_Reset;
         }
       }
@@ -237,20 +248,6 @@ void modeChanger_step(void)
   Pub_modeChanger_36.publish(&modeChanger_B.BusAssignment);
 
   /* End of Outputs for SubSystem: '<Root>/Publish' */
-  /* MATLABSystem: '<Root>/Set Parameter1' incorporates:
-   *  Constant: '<Root>/waitTimeParam'
-   */
-  ParamSet_modeChanger_51.set_parameter(modeChanger_P.waitTimeParam_Value);
-
-  /* MATLABSystem: '<Root>/Set Parameter2' incorporates:
-   *  Constant: '<Root>/highDurationParam'
-   */
-  ParamSet_modeChanger_52.set_parameter(modeChanger_P.highDurationParam_Value);
-
-  /* MATLABSystem: '<Root>/Set Parameter3' incorporates:
-   *  Constant: '<Root>/lowDurationParam'
-   */
-  ParamSet_modeChanger_53.set_parameter(modeChanger_P.lowDurationParam_Value);
 }
 
 /* Model initialize function */
@@ -267,24 +264,72 @@ void modeChanger_initialize(void)
                 sizeof(DW_modeChanger_T));
 
   {
-    char_T tmp[11];
-    char_T tmp_0[13];
-    char_T tmp_1[10];
+    char_T tmp[13];
+    char_T tmp_0[10];
+    char_T tmp_1[11];
     int32_T i;
-    static const char_T tmp_2[10] = { '/', 'h', 'i', 'g', 'h', 'b', 'e', 'a',
-      'm', 's' };
+    static const char_T tmp_2[12] = { '/', 'l', 'o', 'w', 'D', 'u', 'r', 'a',
+      't', 'i', 'o', 'n' };
 
-    static const char_T tmp_3[12] = { '/', 'm', 'o', 'd', 'e', 'C', 'h', 'a',
-      'n', 'g', 'e', 'r' };
+    static const char_T tmp_3[13] = { '/', 'h', 'i', 'g', 'h', 'D', 'u', 'r',
+      'a', 't', 'i', 'o', 'n' };
 
     static const char_T tmp_4[9] = { '/', 'w', 'a', 'i', 't', 'T', 'i', 'm', 'e'
     };
 
-    static const char_T tmp_5[13] = { '/', 'h', 'i', 'g', 'h', 'D', 'u', 'r',
-      'a', 't', 'i', 'o', 'n' };
+    static const char_T tmp_5[10] = { '/', 'h', 'i', 'g', 'h', 'b', 'e', 'a',
+      'm', 's' };
 
-    static const char_T tmp_6[12] = { '/', 'l', 'o', 'w', 'D', 'u', 'r', 'a',
-      't', 'i', 'o', 'n' };
+    static const char_T tmp_6[12] = { '/', 'm', 'o', 'd', 'e', 'C', 'h', 'a',
+      'n', 'g', 'e', 'r' };
+
+    /* Start for MATLABSystem: '<Root>/lowDurationParam' */
+    modeChanger_DW.obj.matlabCodegenIsDeleted = false;
+    modeChanger_DW.objisempty_j = true;
+    modeChanger_DW.obj.isInitialized = 1;
+    for (i = 0; i < 12; i++) {
+      tmp[i] = tmp_2[i];
+    }
+
+    tmp[12] = '\x00';
+    ParamGet_modeChanger_56.initialize(tmp);
+    ParamGet_modeChanger_56.initialize_error_codes(0, 1, 2, 3);
+    ParamGet_modeChanger_56.set_initial_value(0.05);
+    modeChanger_DW.obj.isSetupComplete = true;
+
+    /* End of Start for MATLABSystem: '<Root>/lowDurationParam' */
+
+    /* Start for MATLABSystem: '<Root>/highDurationParam' */
+    modeChanger_DW.obj_f.matlabCodegenIsDeleted = false;
+    modeChanger_DW.objisempty_p = true;
+    modeChanger_DW.obj_f.isInitialized = 1;
+    for (i = 0; i < 13; i++) {
+      modeChanger_B.cv[i] = tmp_3[i];
+    }
+
+    modeChanger_B.cv[13] = '\x00';
+    ParamGet_modeChanger_59.initialize(modeChanger_B.cv);
+    ParamGet_modeChanger_59.initialize_error_codes(0, 1, 2, 3);
+    ParamGet_modeChanger_59.set_initial_value(0.05);
+    modeChanger_DW.obj_f.isSetupComplete = true;
+
+    /* End of Start for MATLABSystem: '<Root>/highDurationParam' */
+
+    /* Start for MATLABSystem: '<Root>/lowDurationParam1' */
+    modeChanger_DW.obj_l.matlabCodegenIsDeleted = false;
+    modeChanger_DW.objisempty_kg = true;
+    modeChanger_DW.obj_l.isInitialized = 1;
+    for (i = 0; i < 9; i++) {
+      tmp_0[i] = tmp_4[i];
+    }
+
+    tmp_0[9] = '\x00';
+    ParamGet_modeChanger_60.initialize(tmp_0);
+    ParamGet_modeChanger_60.initialize_error_codes(0, 1, 2, 3);
+    ParamGet_modeChanger_60.set_initial_value(0.25);
+    modeChanger_DW.obj_l.isSetupComplete = true;
+
+    /* End of Start for MATLABSystem: '<Root>/lowDurationParam1' */
 
     /* Start for Atomic SubSystem: '<Root>/Subscribe2' */
     /* Start for MATLABSystem: '<S3>/SourceBlock' */
@@ -292,11 +337,11 @@ void modeChanger_initialize(void)
     modeChanger_DW.objisempty = true;
     modeChanger_DW.obj_d.isInitialized = 1;
     for (i = 0; i < 10; i++) {
-      tmp[i] = tmp_2[i];
+      tmp_1[i] = tmp_5[i];
     }
 
-    tmp[10] = '\x00';
-    Sub_modeChanger_49.createSubscriber(tmp, 1);
+    tmp_1[10] = '\x00';
+    Sub_modeChanger_49.createSubscriber(tmp_1, 1);
     modeChanger_DW.obj_d.isSetupComplete = true;
 
     /* End of Start for MATLABSystem: '<S3>/SourceBlock' */
@@ -304,61 +349,19 @@ void modeChanger_initialize(void)
 
     /* Start for Atomic SubSystem: '<Root>/Publish' */
     /* Start for MATLABSystem: '<S2>/SinkBlock' */
-    modeChanger_DW.obj.matlabCodegenIsDeleted = false;
+    modeChanger_DW.obj_n.matlabCodegenIsDeleted = false;
     modeChanger_DW.objisempty_k = true;
-    modeChanger_DW.obj.isInitialized = 1;
+    modeChanger_DW.obj_n.isInitialized = 1;
     for (i = 0; i < 12; i++) {
-      tmp_0[i] = tmp_3[i];
+      tmp[i] = tmp_6[i];
     }
 
-    tmp_0[12] = '\x00';
-    Pub_modeChanger_36.createPublisher(tmp_0, 1);
-    modeChanger_DW.obj.isSetupComplete = true;
+    tmp[12] = '\x00';
+    Pub_modeChanger_36.createPublisher(tmp, 1);
+    modeChanger_DW.obj_n.isSetupComplete = true;
 
     /* End of Start for MATLABSystem: '<S2>/SinkBlock' */
     /* End of Start for SubSystem: '<Root>/Publish' */
-
-    /* Start for MATLABSystem: '<Root>/Set Parameter1' */
-    modeChanger_DW.obj_k.matlabCodegenIsDeleted = false;
-    modeChanger_DW.objisempty_l = true;
-    modeChanger_DW.obj_k.isInitialized = 1;
-    for (i = 0; i < 9; i++) {
-      tmp_1[i] = tmp_4[i];
-    }
-
-    tmp_1[9] = '\x00';
-    ParamSet_modeChanger_51.initialize(tmp_1);
-    modeChanger_DW.obj_k.isSetupComplete = true;
-
-    /* End of Start for MATLABSystem: '<Root>/Set Parameter1' */
-
-    /* Start for MATLABSystem: '<Root>/Set Parameter2' */
-    modeChanger_DW.obj_g.matlabCodegenIsDeleted = false;
-    modeChanger_DW.objisempty_c = true;
-    modeChanger_DW.obj_g.isInitialized = 1;
-    for (i = 0; i < 13; i++) {
-      modeChanger_B.cv[i] = tmp_5[i];
-    }
-
-    modeChanger_B.cv[13] = '\x00';
-    ParamSet_modeChanger_52.initialize(modeChanger_B.cv);
-    modeChanger_DW.obj_g.isSetupComplete = true;
-
-    /* End of Start for MATLABSystem: '<Root>/Set Parameter2' */
-
-    /* Start for MATLABSystem: '<Root>/Set Parameter3' */
-    modeChanger_DW.obj_b.matlabCodegenIsDeleted = false;
-    modeChanger_DW.objisempty_a = true;
-    modeChanger_DW.obj_b.isInitialized = 1;
-    for (i = 0; i < 12; i++) {
-      tmp_0[i] = tmp_6[i];
-    }
-
-    tmp_0[12] = '\x00';
-    ParamSet_modeChanger_53.initialize(tmp_0);
-    modeChanger_DW.obj_b.isSetupComplete = true;
-
-    /* End of Start for MATLABSystem: '<Root>/Set Parameter3' */
   }
 
   /* SystemInitialize for Atomic SubSystem: '<Root>/Subscribe2' */
@@ -378,6 +381,15 @@ void modeChanger_initialize(void)
 /* Model terminate function */
 void modeChanger_terminate(void)
 {
+  /* Terminate for MATLABSystem: '<Root>/lowDurationParam' */
+  matlabCodegenHandle_matlabCodeg(&modeChanger_DW.obj);
+
+  /* Terminate for MATLABSystem: '<Root>/highDurationParam' */
+  matlabCodegenHandle_matlabCodeg(&modeChanger_DW.obj_f);
+
+  /* Terminate for MATLABSystem: '<Root>/lowDurationParam1' */
+  matlabCodegenHandle_matlabCodeg(&modeChanger_DW.obj_l);
+
   /* Terminate for Atomic SubSystem: '<Root>/Subscribe2' */
   /* Terminate for MATLABSystem: '<S3>/SourceBlock' */
   matlabCodegenHandle_matlab_ktm2(&modeChanger_DW.obj_d);
@@ -386,16 +398,7 @@ void modeChanger_terminate(void)
 
   /* Terminate for Atomic SubSystem: '<Root>/Publish' */
   /* Terminate for MATLABSystem: '<S2>/SinkBlock' */
-  matlabCodegenHandle_matlabC_ktm(&modeChanger_DW.obj);
+  matlabCodegenHandle_matlabC_ktm(&modeChanger_DW.obj_n);
 
   /* End of Terminate for SubSystem: '<Root>/Publish' */
-
-  /* Terminate for MATLABSystem: '<Root>/Set Parameter1' */
-  matlabCodegenHandle_matlabCodeg(&modeChanger_DW.obj_k);
-
-  /* Terminate for MATLABSystem: '<Root>/Set Parameter2' */
-  matlabCodegenHandle_matlabCodeg(&modeChanger_DW.obj_g);
-
-  /* Terminate for MATLABSystem: '<Root>/Set Parameter3' */
-  matlabCodegenHandle_matlabCodeg(&modeChanger_DW.obj_b);
 }

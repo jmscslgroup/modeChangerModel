@@ -7,9 +7,9 @@
  *
  * Code generation for model "modeChanger".
  *
- * Model version              : 1.25
+ * Model version              : 1.28
  * Simulink Coder version : 9.3 (R2020a) 18-Nov-2019
- * C++ source code generated on : Fri Sep 18 22:19:45 2020
+ * C++ source code generated on : Fri Sep 18 22:35:03 2020
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -52,19 +52,19 @@ typedef struct {
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  ros_slros_internal_block_Publ_T obj; /* '<S2>/SinkBlock' */
-  ros_slros_internal_block_SetP_T obj_k;/* '<Root>/Set Parameter1' */
-  ros_slros_internal_block_SetP_T obj_g;/* '<Root>/Set Parameter2' */
-  ros_slros_internal_block_SetP_T obj_b;/* '<Root>/Set Parameter3' */
+  ros_slros_internal_block_GetP_T obj; /* '<Root>/lowDurationParam' */
+  ros_slros_internal_block_GetP_T obj_f;/* '<Root>/highDurationParam' */
+  ros_slros_internal_block_GetP_T obj_l;/* '<Root>/lowDurationParam1' */
+  ros_slros_internal_block_Publ_T obj_n;/* '<S2>/SinkBlock' */
   ros_slros_internal_block_Subs_T obj_d;/* '<S3>/SourceBlock' */
   uint32_T temporalCounter_i1;         /* '<Root>/Chart' */
   uint8_T is_active_c3_modeChanger;    /* '<Root>/Chart' */
   uint8_T is_c3_modeChanger;           /* '<Root>/Chart' */
   boolean_T objisempty;                /* '<S3>/SourceBlock' */
   boolean_T objisempty_k;              /* '<S2>/SinkBlock' */
-  boolean_T objisempty_l;              /* '<Root>/Set Parameter1' */
-  boolean_T objisempty_c;              /* '<Root>/Set Parameter2' */
-  boolean_T objisempty_a;              /* '<Root>/Set Parameter3' */
+  boolean_T objisempty_j;              /* '<Root>/lowDurationParam' */
+  boolean_T objisempty_p;              /* '<Root>/highDurationParam' */
+  boolean_T objisempty_kg;             /* '<Root>/lowDurationParam1' */
 } DW_modeChanger_T;
 
 /* Parameters (default storage) */
@@ -86,15 +86,6 @@ struct P_modeChanger_T_ {
                                         */
   real_T NoChange_Value;               /* Expression: 0
                                         * Referenced by: '<Root>/NoChange'
-                                        */
-  real_T lowDurationParam_Value;       /* Expression: 0.05
-                                        * Referenced by: '<Root>/lowDurationParam'
-                                        */
-  real_T highDurationParam_Value;      /* Expression: 0.05
-                                        * Referenced by: '<Root>/highDurationParam'
-                                        */
-  real_T waitTimeParam_Value;          /* Expression: .25
-                                        * Referenced by: '<Root>/waitTimeParam'
                                         */
 };
 
